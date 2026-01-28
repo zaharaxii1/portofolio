@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ActiveSphere - Blog Olahraga Premium</title>
+  <meta name="description" content="Platform inspirasi olahraga terdepan dengan tips, trik, dan motivasi untuk gaya hidup aktif">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Hero Video Background */
+        .hero-video {
+            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%); 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-video::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="runner" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.15)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23runner)"/></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .sport-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin: 0 auto 1rem;
+        }
+        
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .chatbot-toggle {
+            background: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4); 
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        .navbar-blur { backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.9); transition: all 0.3s ease; }
+
+        .schedule-card {
+            border-left: 5px solid;
+            border-image: linear-gradient(to bottom, #2563EB, #06B6D4) 1;
+        }
+
+        .cta-program {
+            background: linear-gradient(45deg, #1e3a8a 0%, #0891b2 100%);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        .gallery-item-hover:hover .gallery-item-image {
+            transform: scale(1.1);
+        }
+        
+        /* Artikel Modal Scrollbar */
+        .article-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .article-content::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .article-content::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 4px;
+        }
+        .article-content::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+    </style>
+ </head>
+ <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-300">
+  
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+   <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16"><div class="flex items-center space-x-2">
+      <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center"><i class="fas fa-dumbbell text-white text-lg"></i>
+      </div>
+      <span id="site-title" class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">ActiveSphere</span>
+     </div><div class="hidden md:flex items-center space-x-8"><a href="#home" class="hover:text-blue-600 transition-colors">Home</a> <a href="#tips" class="hover:text-blue-600 transition-colors">Tips & Trik</a> <a href="#gallery" class="hover:text-blue-600 transition-colors">Sport Gallery</a> <a href="#program" class="hover:text-blue-600 transition-colors">Program</a> <a href="#about" class="hover:text-blue-600 transition-colors">About Me</a>
+     </div><div class="flex items-center space-x-4"><div class="relative"><button id="search-toggle" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"> <i class="fas fa-search"></i> </button>
+      </div><select id="language-switcher" class="bg-transparent border-none text-sm cursor-pointer"> <option value="id">ID</option> <option value="en">EN</option> </select> <button id="dark-mode-toggle" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"> <i class="fas fa-moon dark:hidden"></i> <i class="fas fa-sun hidden dark:block"></i> </button> <button id="mobile-menu-toggle" class="md:hidden p-2"> <i class="fas fa-bars"></i> </button>
+     </div>
+    </div>
+   </div><div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <div class="px-4 py-2 space-y-2"><a href="#home" class="block py-2 hover:text-blue-600 transition-colors">Home</a> <a href="#tips" class="block py-2 hover:text-blue-600 transition-colors">Tips & Trik</a> <a href="#gallery" class="block py-2 hover:text-blue-600 transition-colors">Sport Gallery</a> <a href="#program" class="block py-2 hover:text-blue-600 transition-colors">Program</a> <a href="#about" class="block py-2 hover:text-blue-600 transition-colors">About Me</a>
+    </div>
+   </div>
+  </nav>
+
+  <div id="search-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+   <div class="flex items-center justify-center min-h-full p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-2xl">
+     <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-semibold">Cari Artikel & Tips</h3><button id="search-close" class="text-gray-500 hover:text-gray-700"> <i class="fas fa-times"></i> </button>
+     </div>
+     <div class="relative"><input type="text" id="search-input" placeholder="Cari tips olahraga, artikel, galeri..." class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+      <div id="search-suggestions" class="search-suggestions hidden mt-2 bg-white dark:bg-gray-700 rounded shadow-lg p-2">
+       <div class="suggestion-item p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">Tips Cardio untuk Pemula</div>
+       <div class="suggestion-item p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">Yoga Morning Routine</div>
+       <div class="suggestion-item p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">Gym Equipment Guide</div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <section id="home" class="hero-video min-h-screen flex items-center justify-center text-white relative">
+   <div class="container mx-auto px-4 text-center z-10">
+    <div class="fade-in">
+     <h1 id="hero-title" class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Mulai Bergerak,<br>Rasakan Perubahan</h1>
+     <p id="hero-subtitle" class="text-xl md:text-2xl mb-8 opacity-90 max-w-2xl mx-auto">Setiap langkah kecil menuju kesehatan lebih berarti daripada diam tanpa usaha.
+</p>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#tips" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105"> Tips & Trik Terbaru </a> 
+      <a href="#program" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all transform hover:scale-105"> Ubah Badan Sekarang </a>
+     </div>
+    </div>
+   </div><div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"><i class="fas fa-chevron-down text-2xl opacity-70"></i>
+   </div>
+  </section>
+
+  <section class="py-16 bg-white dark:bg-gray-800">
+   <div class="container mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+     <div class="fade-in">
+      <div class="stats-counter" data-target="15000">0</div>
+      <p class="text-gray-600 dark:text-gray-400">Pembaca Aktif</p>
+     </div>
+     <div class="fade-in">
+      <div class="stats-counter" data-target="250">0</div>
+      <p class="text-gray-600 dark:text-gray-400">Artikel Tips</p>
+     </div>
+     <div class="fade-in">
+      <div class="stats-counter" data-target="50">0</div>
+      <p class="text-gray-600 dark:text-gray-400">Video Tutorial</p>
+     </div>
+     <div class="fade-in">
+      <div class="stats-counter" data-target="1200">0</div>
+      <p class="text-gray-600 dark:text-gray-400">Pembaca Mingguan</p>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <div class="container mx-auto px-4 py-16">
+   <div class="flex flex-col lg:flex-row gap-8">
+    
+    <main class="lg:w-2/3">
+     <section id="tips" class="mb-16">
+      <h2 class="text-3xl font-bold mb-8 text-center">Kategori Olahraga</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+       
+       <div onclick="openCategory('cardio')" class="card-hover cursor-pointer bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center group">
+        <div class="sport-icon group-hover:scale-110 transition-transform"><i class="fas fa-heartbeat"></i></div>
+        <h3 class="font-semibold mb-2">Cardio</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Tips kesehatan jantung</p>
+       </div>
+       
+       <div onclick="openCategory('yoga')" class="card-hover cursor-pointer bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center group">
+        <div class="sport-icon group-hover:scale-110 transition-transform"><i class="fas fa-leaf"></i></div>
+        <h3 class="font-semibold mb-2">Yoga</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Fleksibilitas & ketenangan</p>
+       </div>
+       
+       <div onclick="openCategory('gym')" class="card-hover cursor-pointer bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center group">
+        <div class="sport-icon group-hover:scale-110 transition-transform"><i class="fas fa-dumbbell"></i></div>
+        <h3 class="font-semibold mb-2">Gym</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Latihan otot intensif</p>
+       </div>
+       
+       <div onclick="openCategory('outdoor')" class="card-hover cursor-pointer bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center group">
+        <div class="sport-icon group-hover:scale-110 transition-transform"><i class="fas fa-mountain"></i></div>
+        <h3 class="font-semibold mb-2">Outdoor</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">Petualangan alam</p>
+       </div>
+
+      </div>
+     </section>
+
+     <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Tips & Trik Olahraga Terbaru</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+       
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-blue-600 to-cyan-500 flex items-center justify-center"><i class="fas fa-running text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Tips Pemula</span> <span class="text-gray-500 text-sm ml-auto">2 hari lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">5 Tips Memulai Jogging untuk Pemula</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Panduan lengkap memulai jogging dengan aman dan efektif untuk pemula.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">4.7</span></div>
+          <button onclick="openArticle('jogging', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-teal-500 to-green-600 flex items-center justify-center"><i class="fas fa-spa text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Yoga</span> <span class="text-gray-500 text-sm ml-auto">5 hari lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">Morning Yoga Routine 15 Menit</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Rutinitas yoga pagi yang mudah dan efektif untuk memulai hari dengan energi.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">4.9</span></div>
+          <button onclick="openArticle('yoga', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-red-500 to-pink-600 flex items-center justify-center"><i class="fas fa-weight-hanging text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs">Gym</span> <span class="text-gray-500 text-sm ml-auto">1 minggu lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">Latihan Kekuatan Tanpa Alat</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Panduan membangun otot tanpa ke gym, cukup dengan berat badan.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star-half-alt"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">4.3</span></div>
+          <button onclick="openArticle('homegym', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center"><i class="fas fa-briefcase-medical text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">Outdoor</span> <span class="text-gray-500 text-sm ml-auto">2 minggu lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">Mencegah Cedera Saat Mendaki</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Teknik pemanasan dan perlengkapan penting untuk menjaga lutut saat mendaki.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">4.5</span></div>
+          <button onclick="openArticle('hiking', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-orange-500 to-yellow-600 flex items-center justify-center"><i class="fas fa-apple-alt text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">Diet</span> <span class="text-gray-500 text-sm ml-auto">1 bulan lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">Cara Menghitung Kebutuhan Kalori</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Panduan sederhana mengetahui BMR dan TDEE untuk mencapai berat badan ideal.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">5.0</span></div>
+          <button onclick="openArticle('calories', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+       <article class="card-hover bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden flex flex-col">
+        <div class="h-48 bg-gradient-to-r from-indigo-600 to-blue-700 flex items-center justify-center"><i class="fas fa-wind text-white text-4xl"></i></div>
+        <div class="p-6 flex flex-col flex-1">
+         <div class="flex items-center mb-2"><span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded text-xs">Mindfulness</span> <span class="text-gray-500 text-sm ml-auto">1 bulan lalu</span></div>
+         <h3 class="text-xl font-semibold mb-2">Teknik Pernapasan untuk Fokus</h3>
+         <p class="text-gray-600 dark:text-gray-400 mb-4 flex-1">Pelajari teknik pernapasan 4-7-8 untuk mengurangi stres dan meningkatkan fokus.</p>
+         <div class="flex items-center justify-between mt-auto">
+          <div class="flex items-center text-yellow-500 text-sm"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star-half-alt"></i> <span class="text-gray-600 dark:text-gray-400 ml-2">4.4</span></div>
+          <button onclick="openArticle('breathing', event)" class="text-blue-600 hover:text-blue-800 font-medium hover:underline focus:outline-none">Baca Selengkapnya</button>
+         </div>
+        </div>
+       </article>
+
+      </div>
+     </section>
+
+     <section id="gallery" class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Sport Gallery (Inspirasi Visual & Video)</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+       <a href="https://www.youtube.com/watch?v=A3WUKkmHqgU" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?running,trail" alt="Morning Run" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">Morning Run</p>
+         </div>
+        </div>
+       </a>
+       <a href="https://www.youtube.com/watch?v=dA-dGCSLo7A" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?weightlifting,gym" alt="Weightlifting" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">Weightlifting</p>
+         </div>
+        </div>
+       </a>
+       <a href="https://www.youtube.com/watch?v=OEyvLMNJgRk" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?yoga,meditation" alt="Yoga" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">Yoga</p>
+         </div>
+        </div>
+       </a>
+       <a href="https://www.youtube.com/watch?v=LVy9mwWfXxc" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?swimming,pool" alt="Renang" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">Renang</p>
+         </div>
+        </div>
+       </a>
+       <a href="https://www.youtube.com/watch?v=nC8EqGbm4fc" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?cycling,road" alt="Sepeda" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">Sepeda</p>
+         </div>
+        </div>
+       </a>
+       <a href="https://www.youtube.com/watch?v=HR7QZexQees" target="_blank" class="card-hover gallery-item-hover aspect-square rounded-xl shadow-lg overflow-hidden block cursor-pointer relative group">
+        <img src="https://source.unsplash.com/random/500x500?hiit,training" alt="HIIT" class="gallery-item-image">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-all group-hover:bg-opacity-20">
+         <div class="text-center">
+          <i class="fas fa-play-circle text-white text-5xl mb-2 group-hover:text-cyan-400 transition-colors"></i>
+          <p class="text-white text-lg font-bold">HIIT</p>
+         </div>
+        </div>
+       </a>
+      </div>
+     </section>
+    </main>
+
+    <aside class="lg:w-1/3">
+     <div class="sticky top-24 space-y-6">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+       <h3 class="font-semibold mb-4">Kategori Cepat</h3>
+       <div class="space-y-2">
+        <a href="#" onclick="openCategory('cardio', event)" class="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"> <i class="fas fa-heartbeat text-red-500 mr-2"></i>Cardio </a> 
+        <a href="#" onclick="openCategory('yoga', event)" class="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"> <i class="fas fa-leaf text-green-500 mr-2"></i>Yoga & Meditasi </a> 
+        <a href="#" onclick="openCategory('gym', event)" class="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"> <i class="fas fa-dumbbell text-indigo-500 mr-2"></i>Gym & Kekuatan </a> 
+        <a href="#" onclick="openCategory('outdoor', event)" class="block py-2 px-3 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"> <i class="fas fa-mountain text-yellow-500 mr-2"></i>Outdoor Activity </a>
+       </div>
+      </div>
+      
+      <div class="bg-gradient-to-r from-blue-600 to-cyan-500 p-6 rounded-xl text-white">
+       <div class="text-center"><i class="fas fa-quote-left text-2xl opacity-50 mb-3"></i>
+        <p class="italic mb-3">"Tubuh yang sehat adalah tempat tinggal jiwa yang bahagia"</p>
+        <p class="text-sm opacity-75">- Motivasi Harian</p>
+       </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+       <h3 id="newsletter-title" class="font-semibold mb-4">Berlangganan Newsletter</h3>
+       <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Dapatkan tips olahraga terbaru langsung di email Anda</p>
+       <form class="space-y-3"><input type="email" placeholder="Email Anda" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"> <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-2 rounded-lg hover:from-blue-700 hover:to-cyan-600 transition-all"> Berlangganan </button>
+       </form>
+      </div>
+     </div>
+    </aside>
+   </div>
+  </div>
+
+  <section id="program" class="py-20 cta-program text-white">
+   <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Siap Mengubah Badan Kamu?</h2>
+    <p class="text-xl opacity-90 mb-8 max-w-3xl mx-auto">Mulai program fitness yang terstruktur dan terbukti efektif hari ini.</p>
+   <a href="file:///C:/Users/ASUS/Documents/html%20kelas%2012/form/FORM1.HTML" target="_blank" class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-8 py-3 rounded-lg font-bold hover:from-blue-700 hover:to-cyan-600 transition-all shadow-md inline-flex items-center text-lg"> Buat Jadwal Pribadi <i class="fas fa-arrow-right ml-2 text-xl"></i></a>
+   </div>
+  </section>
+
+  <section id="schedule" class="py-16 bg-white dark:bg-gray-800">
+   <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-10 text-center">Sesuaikan Jadwal & Rencanakan Lebih Efektif</h2>
+    <div class="max-w-4xl mx-auto space-y-6">
+     <div class="schedule-card bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md flex items-start space-x-4">
+      <i class="fas fa-calendar-check text-2xl text-blue-600 mt-1"></i>
+      <div>
+       <h3 class="font-semibold text-xl mb-1">Rencanakan 7 Hari Ke Depan</h3>
+       <p class="text-gray-600 dark:text-gray-400">Gunakan template yang mudah untuk merencanakan latihan Anda dari Senin sampai Minggu.</p>
+      </div>
+     </div>
+     <div class="schedule-card bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md flex items-start space-x-4">
+      <i class="fas fa-chart-line text-2xl text-cyan-600 mt-1"></i>
+      <div>
+       <h3 class="font-semibold text-xl mb-1">Pantau Progres Harian</h3>
+       <p class="text-gray-600 dark:text-gray-400">Catat kalori, jarak tempuh, dan intensitas latihan untuk melihat pertumbuhan Anda.</p>
+      </div>
+     </div>
+     <div class="schedule-card bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md flex items-start space-x-4">
+      <i class="fas fa-edit text-2xl text-purple-600 mt-1"></i>
+      <div>
+       <h3 class="font-semibold text-xl mb-1">Fleksibel & Dapat Disesuaikan</h3>
+       <p class="text-gray-600 dark:text-gray-400">Merasa program terlalu berat? Ubah dan tingkatkan intensitas secara bertahap.</p>
+      </div>
+     </div>
+    </div>
+    <div class="text-center mt-10">
+     <a href="file:///C:/Users/ASUS/Documents/html%20kelas%2012/form/FORM2%20-%20Copy.HTML" class="text-blue-600 dark:text-cyan-400 font-semibold hover:underline"> Gunakan Template Jadwal Kami <i class="fas fa-arrow-right ml-2"></i> </a>
+    </div>
+   </div>
+  </section>
+
+  <section id="benefits" class="py-16 bg-gray-100 dark:bg-gray-700">
+   <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-12 text-center">Manfaat Rutin Berolahraga</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+     <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-blue-600">
+      <i class="fas fa-brain text-5xl text-blue-600 dark:text-cyan-400 mb-4"></i>
+      <h3 class="font-semibold text-xl mb-2">Fokus Meningkat</h3>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Mempertajam konsentrasi dan kinerja otak.</p>
+     </div>
+     <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-green-600">
+      <i class="fas fa-shield-alt text-5xl text-green-600 dark:text-green-400 mb-4"></i>
+      <h3 class="font-semibold text-xl mb-2">Imunitas Kuat</h3>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Sistem kekebalan tubuh melawan penyakit lebih efektif.</p>
+     </div>
+     <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-red-600">
+      <i class="fas fa-bed text-5xl text-red-600 dark:text-red-400 mb-4"></i>
+      <h3 class="font-semibold text-xl mb-2">Tidur Lelap</h3>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Membantu siklus tidur lebih teratur.</p>
+     </div>
+     <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border-t-4 border-purple-600">
+      <i class="fas fa-grin-beam text-5xl text-purple-600 dark:text-purple-400 mb-4"></i>
+      <h3 class="font-semibold text-xl mb-2">Kurangi Stres</h3>
+      <p class="text-gray-600 dark:text-gray-400 text-sm">Meredakan ketegangan dan memperbaiki mood.</p>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="testimonials" class="py-16 bg-white dark:bg-gray-800">
+   <div class="container mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-12">Kata Mereka Tentang ActiveSphere</h2>
+    <div class="max-w-3xl mx-auto">
+     <div id="testimonial-carousel" class="relative min-h-[250px] flex items-center justify-center mb-6"></div>
+     <div class="flex justify-center items-center space-x-4">
+      <button onclick="prevTestimonial()" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 transition-colors"> <i class="fas fa-chevron-left"></i> </button>
+      <div id="testimonial-dots" class="flex space-x-2"></div>
+      <button onclick="nextTestimonial()" class="p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 transition-colors"> <i class="fas fa-chevron-right"></i> </button>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="about" class="py-16 bg-gray-100 dark:bg-gray-700">
+   <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-12 text-center">Tentang Kami</h2>
+    <div class="max-w-4xl mx-auto">
+     <p class="text-lg text-gray-700 dark:text-gray-300 mb-8 text-center">ActiveSphere adalah partner kebugaran Anda. Kami menyajikan konten berkualitas, terpercaya, dan mudah diakses.</p>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div>
+       <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-lightbulb text-white text-xl"></i></div>
+       <h3 class="font-semibold mb-2">Edukasi</h3>
+       <p class="text-gray-600 dark:text-gray-400">Artikel berbasis riset</p>
+      </div>
+      <div>
+       <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-users text-white text-xl"></i></div>
+       <h3 class="font-semibold mb-2">Komunitas</h3>
+       <p class="text-gray-600 dark:text-gray-400">Saling mendukung</p>
+      </div>
+      <div>
+       <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4"><i class="fas fa-heart text-white text-xl"></i></div>
+       <h3 class="font-semibold mb-2">Passion</h3>
+       <p class="text-gray-600 dark:text-gray-400">Gaya hidup aktif</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="contact" class="py-16 bg-white dark:bg-gray-800">
+   <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <h2 class="text-3xl font-bold mb-12">Hubungi Kami</h2>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg">
+            <h3 class="text-xl font-semibold mb-6">Kirim Pesan</h3>
+            <form id="contact-form" class="space-y-4">
+                <input type="text" placeholder="Nama" class="w-full px-4 py-3 rounded-lg border dark:bg-gray-700 dark:border-gray-600" required>
+                <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border dark:bg-gray-700 dark:border-gray-600" required>
+                <textarea rows="4" placeholder="Pesan" class="w-full px-4 py-3 rounded-lg border dark:bg-gray-700 dark:border-gray-600" required></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700">Kirim</button>
+            </form>
+            <div id="contact-success" class="hidden mt-4 text-green-600 bg-green-100 p-3 rounded">Pesan Terkirim!</div>
+        </div>
+        <div class="p-8 flex flex-col justify-center space-y-6">
+            <div class="flex items-center text-gray-600 dark:text-gray-400"><i class="fas fa-envelope text-blue-600 mr-3 text-xl"></i> activesphere.id@email.com</div>
+            <div class="flex items-center text-gray-600 dark:text-gray-400"><i class="fas fa-phone-alt text-blue-600 mr-3 text-xl"></i> +62 812-3456-7890</div>
+            <div class="flex items-center text-gray-600 dark:text-gray-400"><i class="fas fa-map-marker-alt text-blue-600 mr-3 text-xl"></i> Jakarta, Indonesia</div>
+            <div class="flex space-x-4 mt-4">
+                <a href="#" class="text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-2xl text-gray-500 hover:text-blue-600"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+   <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-4 gap-8">
+     <div>
+      <div class="flex items-center mb-4"><i class="fas fa-dumbbell text-2xl text-cyan-400 mr-2"></i> <span class="text-xl font-bold">ActiveSphere</span></div>
+      <p class="text-gray-400 text-sm">Ubah hidup Anda melalui fitness dan gaya hidup sehat.</p>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Menu</h4>
+      <ul class="space-y-2 text-sm text-gray-400">
+       <li><a href="#home" class="hover:text-white">Home</a></li>
+       <li><a href="#tips" class="hover:text-white">Tips & Trik</a></li>
+       <li><a href="#about" class="hover:text-white">Tentang Kami</a></li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Kategori</h4>
+      <ul class="space-y-2 text-sm text-gray-400">
+       <li><a href="#" onclick="openCategory('cardio', event)" class="hover:text-white">Cardio</a></li>
+       <li><a href="#" onclick="openCategory('yoga', event)" class="hover:text-white">Yoga</a></li>
+       <li><a href="#" onclick="openCategory('gym', event)" class="hover:text-white">Gym</a></li>
+      </ul>
+     </div>
+     <div>
+      <h4 class="font-semibold mb-4">Kontak</h4>
+      <ul class="space-y-2 text-sm text-gray-400">
+       <li>activesphere.id@email.com</li>
+       <li>Jakarta, ID</li>
+      </ul>
+     </div>
+    </div>
+    <div class="mt-8 border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+     © 2024 ActiveSphere. All rights reserved.
+    </div>
+   </div>
+  </footer>
+
+  <div id="article-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto bg-gray-900 bg-opacity-95 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300">
+    <div class="relative bg-white dark:bg-gray-800 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="relative h-64 bg-gray-200">
+            <img id="modal-image" src="" alt="Article Image" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                <div>
+                    <span id="modal-category" class="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-2 inline-block">Category</span>
+                    <h2 id="modal-title" class="text-3xl md:text-4xl font-bold text-white leading-tight">Judul Artikel</h2>
+                </div>
+            </div>
+            <button onclick="closeArticle()" class="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <div class="p-8 overflow-y-auto article-content">
+            <div id="modal-body" class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed space-y-4">
+                </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h4 class="font-semibold mb-2 text-gray-900 dark:text-white">Ingin membaca referensi lengkap?</h4>
+                <a id="modal-source-link" href="#" target="_blank" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors w-full md:w-auto">
+                    <i class="fas fa-external-link-alt mr-2"></i> Baca Sumber Asli di Internet
+                </a>
+                <p class="text-xs text-gray-500 mt-2 italic">*Link akan membuka website kesehatan terpercaya (Halodoc, Alodokter, Healthline, dll) di tab baru.</p>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id="chatbot-box" class="fixed bottom-24 right-4 bg-white dark:bg-gray-800 w-80 h-96 rounded-xl shadow-2xl flex flex-col hidden z-50">
+   <div class="flex items-center justify-between p-4 bg-blue-600 text-white rounded-t-xl"><h4 class="font-bold">ActiveSphere Bot</h4> <button id="chatbot-close" class="p-1 hover:bg-blue-700 rounded-full"> <i class="fas fa-times"></i> </button></div>
+   <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto space-y-3">
+    <div class="flex justify-start"><div class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-3 rounded-xl max-w-[80%]">Halo! Ada yang bisa saya bantu?</div></div>
+   </div>
+   <div class="p-4 border-t border-gray-200 dark:border-gray-700 flex">
+    <input type="text" id="chatbot-input" placeholder="Tanya sesuatu..." class="flex-1 px-3 py-2 rounded-l-lg border dark:bg-gray-700 dark:border-gray-600"> <button id="chatbot-send" class="bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700"> <i class="fas fa-paper-plane"></i> </button>
+   </div>
+  </div>
+  <button id="chatbot-toggle" class="fixed bottom-4 right-4 z-50 chatbot-toggle flex items-center justify-center"> <i class="fas fa-comment-dots text-xl"></i> </button>
+  
+  <div id="weather-widget" class="fixed top-20 right-4 p-3 bg-white dark:bg-gray-800 rounded-xl shadow-lg flex items-center space-x-3 z-40 transition-all duration-300">
+   <div id="weather-icon" class="text-3xl text-yellow-500"><i class="fas fa-sun"></i></div>
+   <div><p id="weather-temp" class="text-xl font-bold">28°C</p><span class="ml-2 text-xs">Jakarta</span></div>
+  </div>
+
+  <script>
+    // ==================== DATA KATEGORI (BARU) ====================
+    const categoryData = {
+        'cardio': {
+            title: "Latihan Kardiovaskular (Cardio)",
+            category: "Kategori Utama",
+            image: "https://source.unsplash.com/random/800x400?runner",
+            content: `
+                <p class="font-semibold text-lg">Cardio adalah kunci untuk jantung yang sehat dan stamina yang kuat.</p>
+                <p>Latihan kardio meningkatkan detak jantung dan pernapasan Anda. Ini penting untuk membakar kalori dan meningkatkan metabolisme.</p>
+                <h4 class="font-bold mt-4">Jenis Latihan Cardio Populer:</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Lari & Jogging:</strong> Olahraga paling sederhana, bisa dilakukan di mana saja.</li>
+                    <li><strong>Bersepeda:</strong> Baik untuk sendi karena minim benturan (low impact).</li>
+                    <li><strong>Renang:</strong> Melatih seluruh otot tubuh sekaligus kardio.</li>
+                    <li><strong>HIIT (High Intensity Interval Training):</strong> Latihan intensitas tinggi dalam waktu singkat.</li>
+                </ul>
+            `,
+            sourceUrl: "https://www.halodoc.com/kesehatan/olahraga-kardio"
+        },
+        'yoga': {
+            title: "Yoga & Meditasi",
+            category: "Kategori Utama",
+            image: "https://source.unsplash.com/random/800x400?yoga-pose",
+            content: `
+                <p class="font-semibold text-lg">Menyinkronkan tubuh dan pikiran untuk kesejahteraan holistik.</p>
+                <p>Yoga bukan hanya tentang fleksibilitas, tetapi juga tentang kekuatan otot, pernapasan, dan ketenangan mental.</p>
+                <h4 class="font-bold mt-4">Manfaat Yoga:</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li>Meningkatkan fleksibilitas dan keseimbangan.</li>
+                    <li>Mengurangi stres dan kecemasan melalui teknik pernapasan.</li>
+                    <li>Memperbaiki postur tubuh.</li>
+                    <li>Meningkatkan kualitas tidur.</li>
+                </ul>
+            `,
+            sourceUrl: "https://www.alodokter.com/cari-tahu-manfaat-yoga-bagi-kesehatan-tubuh-dan-mental"
+        },
+        'gym': {
+            title: "Gym & Latihan Kekuatan",
+            category: "Kategori Utama",
+            image: "https://source.unsplash.com/random/800x400?gym-workout",
+            content: `
+                <p class="font-semibold text-lg">Membangun otot dan meningkatkan metabolisme tubuh.</p>
+                <p>Latihan beban (resistance training) sangat penting untuk menjaga kepadatan tulang dan massa otot seiring bertambahnya usia.</p>
+                <h4 class="font-bold mt-4">Tips Latihan Beban:</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Progressive Overload:</strong> Tambah beban atau repetisi secara bertahap.</li>
+                    <li><strong>Compound Movements:</strong> Fokus pada gerakan yang melibatkan banyak sendi (Squat, Deadlift, Bench Press).</li>
+                    <li><strong>Istirahat:</strong> Otot tumbuh saat istirahat, bukan saat latihan. Tidur cukup itu wajib.</li>
+                </ul>
+            `,
+            sourceUrl: "https://hellosehat.com/kebugaran/kekuatan/tips-gym-untuk-pemula/"
+        },
+        'outdoor': {
+            title: "Aktivitas Outdoor & Petualangan",
+            category: "Kategori Utama",
+            image: "https://source.unsplash.com/random/800x400?hiking-mountain",
+            content: `
+                <p class="font-semibold text-lg">Kembali ke alam untuk menyegarkan fisik dan mental.</p>
+                <p>Berolahraga di alam terbuka terbukti dapat menurunkan level kortisol (hormon stres) lebih efektif daripada di dalam ruangan.</p>
+                <h4 class="font-bold mt-4">Ide Aktivitas Outdoor:</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Hiking / Mendaki:</strong> Tantangan fisik dengan pemandangan indah.</li>
+                    <li><strong>Trail Running:</strong> Lari lintas alam dengan medan bervariasi.</li>
+                    <li><strong>Kayaking:</strong> Melatih otot tubuh bagian atas dan keseimbangan.</li>
+                    <li><strong>Panjat Tebing:</strong> Melatih kekuatan cengkeraman dan pemecahan masalah.</li>
+                </ul>
+            `,
+            sourceUrl: "https://superlive.id/superadventure"
+        }
+    };
+
+    // ==================== DATA ARTIKEL (EXISTING) ====================
+    const articlesData = {
+        'jogging': {
+            title: "5 Tips Memulai Jogging untuk Pemula",
+            category: "Cardio",
+            image: "https://source.unsplash.com/random/800x400?jogging",
+            content: `
+                <p class="font-semibold text-lg">Jogging adalah cara termudah dan termurah untuk meningkatkan kesehatan kardiovaskular Anda.</p>
+                <p>Banyak pemula yang gagal di minggu pertama karena terlalu bersemangat di awal lalu cedera atau kelelahan ekstrem. Berikut adalah panduan langkah demi langkah:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Investasi pada Sepatu Lari:</strong> Jangan gunakan sepatu kets biasa (sneakers). Sepatu lari didesain untuk meredam benturan pada lutut dan tumit.</li>
+                    <li><strong>Mulai dengan Jalan Cepat:</strong> Jangan langsung lari. Lakukan pemanasan dengan jalan cepat selama 5-10 menit.</li>
+                    <li><strong>Metode Walk-Run:</strong> Gunakan rasio 1:1. Lari 1 menit, jalan 1 menit. Ulangi selama 20 menit.</li>
+                    <li><strong>Jaga Postur Tubuh:</strong> Pandangan ke depan, bahu rileks, dan jangan mengepal tangan terlalu kuat.</li>
+                    <li><strong>Dengarkan Tubuh Anda:</strong> Jika merasa nyeri tajam (bukan pegal biasa), segera berhenti.</li>
+                </ul>
+                <p>Ingat, konsistensi lebih penting daripada kecepatan. Lebih baik jogging santai 3x seminggu daripada lari cepat sekali sebulan.</p>
+            `,
+            sourceUrl: "https://www.halodoc.com/artikel/tips-jogging-untuk-pemula-agar-tidak-mudah-lelah" 
+        },
+        'yoga': {
+            title: "Morning Yoga Routine 15 Menit",
+            category: "Yoga",
+            image: "https://source.unsplash.com/random/800x400?yoga,morning",
+            content: `
+                <p class="font-semibold text-lg">Memulai hari dengan yoga dapat meningkatkan energi dan fokus Anda sepanjang hari.</p>
+                <p>Rangkaian gerakan ini dirancang untuk membangunkan otot-otot yang kaku setelah tidur:</p>
+                <ol class="list-decimal pl-5 space-y-2">
+                    <li><strong>Child's Pose (2 Menit):</strong> Duduk bersimpuh, bungkukkan badan ke depan hingga dahi menyentuh lantai. Rentangkan tangan sejauh mungkin.</li>
+                    <li><strong>Cat-Cow (3 Menit):</strong> Posisi merangkak. Tarik napas, lengkungkan punggung ke bawah (Cow). Buang napas, lengkungkan punggung ke atas (Cat).</li>
+                    <li><strong>Downward Dog (3 Menit):</strong> Angkat pinggul ke atas membentuk huruf V terbalik. Tekan tumit ke arah lantai.</li>
+                    <li><strong>Warrior I (2 Menit per sisi):</strong> Langkah kaki kanan ke depan, tekuk lutut, angkat tangan ke atas.</li>
+                    <li><strong>Corpse Pose (3 Menit):</strong> Berbaring telentang, rilekskan seluruh tubuh. Fokus pada napas.</li>
+                </ol>
+                <p>Lakukan rutin setiap pagi sebelum sarapan untuk hasil terbaik.</p>
+            `,
+            sourceUrl: "https://www.alodokter.com/manfaat-yoga-di-pagi-hari-dan-gerakannya"
+        },
+        'homegym': {
+            title: "Latihan Kekuatan Tanpa Alat di Rumah",
+            category: "Home Workout",
+            image: "https://source.unsplash.com/random/800x400?pushup",
+            content: `
+                <p>Tidak punya member gym? Tidak masalah. Tubuh Anda adalah alat beban terbaik.</p>
+                <p>Lakukan sirkuit ini sebanyak 3 putaran:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Push Up (10-15 reps):</strong> Melatih dada, bahu, dan tricep. Jika berat, gunakan lutut sebagai tumpuan.</li>
+                    <li><strong>Bodyweight Squat (20 reps):</strong> Melatih paha depan, paha belakang, dan bokong. Jaga punggung tetap lurus.</li>
+                    <li><strong>Plank (30-60 detik):</strong> Melatih otot inti (core) secara menyeluruh. Jangan biarkan pinggul turun.</li>
+                    <li><strong>Lunges (10 reps per kaki):</strong> Melatih keseimbangan dan kekuatan kaki.</li>
+                    <li><strong>Glute Bridges (15 reps):</strong> Berbaring telentang, tekuk lutut, angkat pinggul ke atas. Bagus untuk bokong.</li>
+                </ul>
+                <p>Istirahat 1 menit antar putaran.</p>
+            `,
+            sourceUrl: "https://hellosehat.com/kebugaran/kekuatan/olahraga-di-rumah-tanpa-alat/"
+        },
+        'hiking': {
+            title: "Mencegah Cedera Lutut Saat Mendaki",
+            category: "Outdoor",
+            image: "https://source.unsplash.com/random/800x400?hiking",
+            content: `
+                <p>Mendaki gunung memberikan tekanan besar pada sendi lutut, terutama saat perjalanan turun.</p>
+                <p>Tips menjaga lutut agar tetap aman:</p>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>Gunakan Trekking Pole:</strong> Tongkat mendaki dapat memindahkan hingga 30% beban dari kaki ke tangan.</li>
+                    <li><strong>Potong Kuku Kaki:</strong> Kuku panjang bisa menekan sepatu saat turun, menyebabkan nyeri refleks yang mengubah cara jalan Anda.</li>
+                    <li><strong>Teknik Jalan Turun:</strong> Jangan luruskan lutut sepenuhnya saat menapak (lock knees). Tekuk sedikit lutut untuk meredam benturan.</li>
+                    <li><strong>Latihan Penguatan:</strong> Sebelum jadwal mendaki, perbanyak latihan Squat dan Lunges untuk memperkuat otot sekitar lutut.</li>
+                </ul>
+            `,
+            sourceUrl: "https://superlive.id/superadventure/tips-trick/biar-lutut-gak-nyeri-saat-naik-gunung-ikuti-tips-ini-bro"
+        },
+        'calories': {
+            title: "Cara Menghitung Kebutuhan Kalori Harian",
+            category: "Diet & Nutrisi",
+            image: "https://source.unsplash.com/random/800x400?healthyfood",
+            content: `
+                <p>Untuk menurunkan berat badan (defisit kalori) atau menaikkan otot (surplus), Anda harus tahu TDEE (Total Daily Energy Expenditure) Anda.</p>
+                <p><strong>Rumus Sederhana (Mifflin-St Jeor):</strong></p>
+                <p class="bg-gray-100 dark:bg-gray-700 p-2 rounded">BMR Pria = (10 x BB) + (6.25 x TB) - (5 x Umur) + 5<br>BMR Wanita = (10 x BB) + (6.25 x TB) - (5 x Umur) - 161</p>
+                <p>Setelah dapat angka BMR, kalikan dengan level aktivitas:</p>
+                <ul class="list-disc pl-5">
+                    <li>Jarang olahraga: BMR x 1.2</li>
+                    <li>Olahraga 1-3x/minggu: BMR x 1.375</li>
+                    <li>Olahraga 3-5x/minggu: BMR x 1.55</li>
+                    <li>Olahraga berat tiap hari: BMR x 1.725</li>
+                </ul>
+                <p>Hasilnya adalah kebutuhan kalori harian Anda untuk mempertahankan berat badan saat ini.</p>
+            `,
+            sourceUrl: "https://www.halodoc.com/artikel/cara-menghitung-kebutuhan-kalori-per-hari-agar-diet-efektif"
+        },
+        'breathing': {
+            title: "Teknik Pernapasan 4-7-8 untuk Ketenangan",
+            category: "Mindfulness",
+            image: "https://source.unsplash.com/random/800x400?meditate",
+            content: `
+                <p>Teknik ini dikembangkan oleh Dr. Andrew Weil sebagai "obat penenang alami" untuk sistem saraf.</p>
+                <p><strong>Caranya sangat mudah:</strong></p>
+                <ol class="list-decimal pl-5 space-y-3">
+                    <li>Duduk atau berbaring dengan nyaman.</li>
+                    <li>Buang napas sepenuhnya melalui mulut (suara *whoosh*).</li>
+                    <li>Tutup mulut dan tarik napas perlahan lewat hidung dalam hitungan <strong>4 detik</strong>.</li>
+                    <li>Tahan napas selama <strong>7 detik</strong>.</li>
+                    <li>Buang napas perlahan lewat mulut dengan suara *whoosh* selama <strong>8 detik</strong>.</li>
+                </ol>
+                <p>Ulangi siklus ini sebanyak 4 kali. Lakukan saat merasa cemas atau sulit tidur.</p>
+            `,
+            sourceUrl: "https://www.alodokter.com/teknik-pernapasan-4-7-8-bantu-atasi-susah-tidur-dan-redakan-stres"
+        }
+    };
+
+    // ==================== FUNGSI MODAL ARTIKEL & KATEGORI ====================
+    const articleModal = document.getElementById('article-modal');
+    
+    // Fungsi Buka Artikel
+    function openArticle(articleId, event) {
+        if(event) event.preventDefault();
+
+        const data = articlesData[articleId];
+        if (!data) return;
+        populateModal(data);
+    }
+
+    // Fungsi Buka Kategori (BARU)
+    function openCategory(categoryId, event) {
+        if(event) event.preventDefault();
+
+        const data = categoryData[categoryId];
+        if (!data) return;
+        populateModal(data);
+    }
+
+    // Helper untuk mengisi modal
+    function populateModal(data) {
+        document.getElementById('modal-image').src = data.image;
+        document.getElementById('modal-category').textContent = data.category;
+        document.getElementById('modal-title').textContent = data.title;
+        document.getElementById('modal-body').innerHTML = data.content;
+        document.getElementById('modal-source-link').href = data.sourceUrl;
+
+        articleModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeArticle() {
+        articleModal.classList.add('hidden');
+        document.body.style.overflow = 'auto'; 
+    }
+
+    // Close modal jika klik di luar area konten
+    articleModal.addEventListener('click', (e) => {
+        if (e.target === articleModal) {
+            closeArticle();
+        }
+    });
+
+    // ==================== FUNGSI EXISTING ====================
+    
+    // Testimonials
+    const testimonials = [ 
+        { quote: "ActiveSphere benar-benar mengubah cara saya berolahraga. Tips Cardio-nya sangat mudah diikuti!", name: "Risa A.", title: "Pelari Maraton Amatir" }, 
+        { quote: "Fitur Dark Mode sangat nyaman saat saya membaca tips Yoga di malam hari.", name: "Bima S.", title: "Penggemar Yoga" }, 
+        { quote: "Saya suka sekali Sport Gallery-nya! Sangat memotivasi.", name: "Lita M.", title: "Pencinta Gym" } 
+    ]; 
+    let currentTestimonial = 0; 
+    function updateTestimonialCarousel() { 
+        const carousel = document.getElementById('testimonial-carousel'); 
+        const dotsContainer = document.getElementById('testimonial-dots'); 
+        carousel.innerHTML = ''; dotsContainer.innerHTML = ''; 
+        const t = testimonials[currentTestimonial]; 
+        const card = document.createElement('div'); 
+        card.className = 'bg-gray-50 dark:bg-gray-700 p-10 rounded-xl shadow-2xl relative w-full transition-all duration-500'; 
+        card.innerHTML = ` <i class="fas fa-quote-left text-4xl text-blue-400 opacity-50 absolute top-4 left-4"></i> <p class="text-xl italic mb-6 text-gray-700 dark:text-gray-300">"${t.quote}"</p> <div class="border-t border-blue-200 dark:border-blue-700 pt-4"> <h4 class="font-bold text-blue-600 dark:text-cyan-400">${t.name}</h4> <p class="text-sm text-gray-500 dark:text-gray-400">${t.title}</p> </div> `; 
+        carousel.appendChild(card); 
+        testimonials.forEach((_, index) => { 
+            const dot = document.createElement('button'); 
+            dot.className = `w-3 h-3 rounded-full ${index === currentTestimonial ? 'bg-blue-600' : 'bg-gray-400'}`; 
+            dot.onclick = () => { currentTestimonial = index; updateTestimonialCarousel(); }; 
+            dotsContainer.appendChild(dot); 
+        }); 
+    } 
+    function nextTestimonial() { currentTestimonial = (currentTestimonial + 1) % testimonials.length; updateTestimonialCarousel(); } 
+    function prevTestimonial() { currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length; updateTestimonialCarousel(); } 
+
+    // Navbar Scroll
+    const navbar = document.getElementById('navbar'); 
+    const siteTitle = document.getElementById('site-title'); 
+    window.addEventListener('scroll', () => { 
+        if (window.scrollY > 50) { 
+            navbar.classList.add('navbar-blur', 'shadow-md'); 
+            siteTitle.classList.remove('bg-clip-text', 'text-transparent'); 
+            siteTitle.classList.add('text-gray-900', 'dark:text-white'); 
+        } else { 
+            navbar.classList.remove('navbar-blur', 'shadow-md'); 
+            siteTitle.classList.add('bg-clip-text', 'text-transparent'); 
+        } 
+    });
+
+    // Mobile Menu
+    document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Search
+    const searchOverlay = document.getElementById('search-overlay');
+    document.getElementById('search-toggle').addEventListener('click', () => searchOverlay.classList.remove('hidden'));
+    document.getElementById('search-close').addEventListener('click', () => searchOverlay.classList.add('hidden'));
+
+    // Dark Mode
+    document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+    });
+
+    // Chatbot Toggle
+    document.getElementById('chatbot-toggle').addEventListener('click', () => {
+        document.getElementById('chatbot-box').classList.toggle('hidden');
+    });
+    document.getElementById('chatbot-close').addEventListener('click', () => {
+        document.getElementById('chatbot-box').classList.add('hidden');
+    });
+
+    // Contact Form
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const successMsg = document.getElementById('contact-success');
+        successMsg.classList.remove('hidden');
+        e.target.reset();
+        setTimeout(() => successMsg.classList.add('hidden'), 3000);
+    });
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => { 
+        updateTestimonialCarousel(); 
+        setInterval(nextTestimonial, 5000); 
+    });
+  </script>
+ </body>
+</html>
