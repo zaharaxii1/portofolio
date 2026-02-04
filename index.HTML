@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAHARA | Portofolio Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --royal-blue: #1e3a8a; 
+            --royal-dark: #172554;
+            --accent-gold: #f59e0b; 
+            --gold-light: #fbbf24;
+            --deep-navy: #0f172a;
+            --soft-gray: #f8fafc;
+            --true-black: #020617;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--soft-gray);
+            color: var(--deep-navy);
+            overflow-x: hidden;
+        }
+
+        .font-heading {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--royal-dark) 0%, var(--royal-blue) 50%, var(--deep-navy) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.15;
+            background-image: radial-gradient(circle at 2px 2px, var(--accent-gold) 1.5px, transparent 0);
+            background-size: 32px 32px;
+        }
+
+        .text-gold { color: var(--accent-gold); }
+        .bg-gold { background-color: var(--accent-gold); }
+        .text-royal { color: var(--royal-blue); }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-gold {
+            background: linear-gradient(to right, var(--accent-gold), var(--gold-light));
+            color: #000000 !important;
+            font-weight: 900;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .nav-item {
+            position: relative;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .experience-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+            border: 1px solid rgba(30, 58, 138, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .experience-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+        }
+
+        .education-item {
+            position: relative;
+            padding-left: 3rem;
+            border-left: 2px dashed #e2e8f0;
+        }
+
+        .education-dot {
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .hobby-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2.5rem;
+            border: 1px solid #f1f5f9;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hobby-card:hover {
+            background: var(--royal-blue);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .hobby-card:hover .hobby-icon {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-gold);
+        }
+
+        .photo-frame {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border-bottom: 4px solid var(--accent-gold);
+            text-align: center;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .form-input {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            padding: 1.1rem;
+            border-radius: 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+            color: var(--deep-navy);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--royal-blue);
+        }
+
+        .footer-bottom {
+            background-color: var(--true-black);
+            padding-top: 2.5rem;
+            padding-bottom: 5rem;
+        }
+
+        .footer-link {
+            color: var(--accent-gold) !important;
+            font-weight: 800;
+            transition: all 0.3s ease;
+            letter-spacing: 0.15em;
+        }
+        
+        .footer-link:hover {
+            color: #ffffff !important;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 py-6 transition-all duration-500" id="navbar">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="font-heading text-2xl font-black italic tracking-tighter text-white" id="logo">
+                ZAHARA<span class="text-gold">.</span>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-[11px] font-bold uppercase tracking-[0.2em] text-white/80">
+                <a href="#home" class="nav-item hover:text-white">01. Home</a>
+                <a href="#about" class="nav-item hover:text-white">02. Profil</a>
+                <a href="#education" class="nav-item hover:text-white">03. Pendidikan</a>
+                <a href="#journey" class="nav-item hover:text-white">04. Jejak</a>
+                <a href="#hobby" class="nav-item hover:text-white">05. Hobi</a>
+                <a href="#contact" class="text-gold font-black border-b-2 border-gold pb-1">06. Kontak</a>
+            </nav>
+            <button class="md:hidden text-white" id="mobileMenuBtn"><i data-lucide="menu"></i></button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center pt-20">
+        <div class="hero-pattern"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="inline-block px-5 py-2 bg-gold/10 border border-gold/30 rounded-full mb-8 backdrop-blur-sm">
+                        <span class="text-gold font-extrabold text-[11px] tracking-[0.25em] uppercase">Siswi SMAN 1 Subang</span>
+                    </div>
+                    <h1 class="font-heading text-4xl md:text-6xl font-black text-white leading-tight uppercase mb-7">
+                        DEDIKASI <br>TANPA BATAS,<br>
+                        <span class="text-gold italic drop-shadow-sm">SEMANGAT</span> <br>TANPA HENTI.
+                    </h1>
+                    <p class="text-xl text-blue-50/80 max-w-xl leading-relaxed mb-12 font-light">
+                        Menggabungkan kedisiplinan organisasi dengan ketangkasan teknologi digital untuk menciptakan karya yang berdampak.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <a href="#about" class="btn-gold px-12 py-5 rounded-2xl font-black text-[12px] uppercase tracking-widest shadow-xl">
+                            Pelajari Profil Saya
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden lg:block reveal" style="transition-delay: 300ms;">
+                    <div class="photo-frame aspect-[3/3] overflow-hidden">
+                        <img src="C:\Users\ASUS\Downloads\foto\profil. JPEG.jpeg" alt="Zahara Nurhasanah Profile" class="image-container" onerror="this.src='https://via.placeholder.com/600x600?text=Zahara+Photo'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-white border-b border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="stat-card reveal">
+                    <h3 class="text-3xl font-black text-royal mb-1">2024</h3>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Pengembangan Diri</p>
+                </div>
+                <div class="stat-card reveal" style="transition-delay: 100ms;">
+                    <h3 class="text-3xl font-black text-royal mb-1">05+</h3>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Proyek Digital</p>
+                </div>
+                <div class="stat-card reveal" style="transition-delay: 200ms;">
+                    <h3 class="text-3xl font-black text-royal mb-1">03+</h3>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Pengalaman Organisasi</p>
+                </div>
+                <div class="stat-card reveal" style="transition-delay: 300ms;">
+                    <h3 class="text-3xl font-black text-royal mb-1">100%</h3>
+                    <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Dedikasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-40 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="font-heading text-5xl md:text-7xl font-black uppercase text-royal mb-10 leading-tight">
+                        Bergerak dengan <br><span class="text-gold">Konsistensi.</span>
+                    </h2>
+                    <div class="w-24 h-3 bg-gold rounded-full mb-10"></div>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                        Halo, saya <span class="font-bold text-royal">Zahara Nurhasanah</span>. Sebagai siswi SMAN 1 yang aktif di organisasi dan teknologi, saya percaya bahwa disiplin adalah kunci utama kesuksesan. Saya fokus pada pertumbuhan berkelanjutan dan kolaborasi tim.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-royal/10 rounded-lg text-royal"><i data-lucide="check-circle" size="20"></i></div>
+                            <div>
+                                <h4 class="font-bold text-royal">Kepemimpinan</h4>
+                                <p class="text-sm text-slate-500">Aktif mengelola tim di MPK.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-gold/10 rounded-lg text-gold"><i data-lucide="monitor" size="20"></i></div>
+                            <div>
+                                <h4 class="font-bold text-royal">Teknologi</h4>
+                                <p class="text-sm text-slate-500">Fokus pada Web Development.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal relative" style="transition-delay: 200ms;">
+                    <div class="aspect-square rounded-[80px] overflow-hidden shadow-2xl">
+                        <img src="C:\Users\ASUS\Downloads\foto\curug.jpeg" alt="Profil Zahara Nurhasanah" class="image-container filter brightness-90" onerror="this.src='https://via.placeholder.com/600x600?text=Zahara+Activity'">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 bg-royal p-8 rounded-[40px] text-white shadow-2xl">
+                        <p class="text-4xl font-black text-gold">A+</p>
+                        <p class="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">Pencapaian Akademik</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-40 bg-slate-50 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
+                <div class="max-w-2xl">
+                    <h2 class="font-heading text-5xl md:text-7xl font-black uppercase text-royal leading-none">
+                        MY <span class="text-gold">STUDIES.</span>
+                    </h2>
+                    <p class="text-slate-500 mt-8 text-lg italic">"Pendidikan adalah paspor untuk masa depan."</p>
+                </div>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-12">
+                <!-- SMA -->
+                <div class="education-item reveal">
+                    <div class="education-dot"></div>
+                    <span class="text-xs font-black text-gold uppercase tracking-widest bg-amber-100 px-3 py-1 rounded-full">2023 - Sekarang</span>
+                    <h3 class="font-heading font-extrabold text-2xl text-royal mt-3">SMAN 1 Subang</h3>
+                    <p class="text-slate-500 font-medium">Sekolah Menengah Atas - Jurusan MIPA</p>
+                </div>
+
+                <!-- SMP -->
+                <div class="education-item reveal" style="transition-delay: 100ms;">
+                    <div class="education-dot"></div>
+                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest border border-slate-200 px-3 py-1 rounded-full">2020 - 2023</span>
+                    <h3 class="font-heading font-extrabold text-2xl text-royal mt-3">SMPN 1 Subang</h3>
+                    <p class="text-slate-500 font-medium">Sekolah Menengah Pertama</p>
+                </div>
+
+                <!-- SD -->
+                <div class="education-item reveal" style="transition-delay: 200ms;">
+                    <div class="education-dot"></div>
+                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest border border-slate-200 px-3 py-1 rounded-full">2013 - 2020</span>
+                    <h3 class="font-heading font-extrabold text-2xl text-royal mt-3">SDN Bendungan</h3>
+                    <p class="text-slate-500 font-medium">Sekolah Dasar</p>
+                </div>
+
+                <!-- TK -->
+                <div class="education-item reveal" style="transition-delay: 300ms;">
+                    <div class="education-dot"></div>
+                    <span class="text-xs font-black text-slate-400 uppercase tracking-widest border border-slate-200 px-3 py-1 rounded-full">2012 - 2013</span>
+                    <h3 class="font-heading font-extrabold text-2xl text-royal mt-3">TK Azzahra</h3>
+                    <p class="text-slate-500 font-medium">Pendidikan Anak Usia Dini</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobby" class="py-40 bg-white overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
+                <div class="max-w-2xl">
+                    <h2 class="font-heading text-5xl md:text-7xl font-black uppercase text-royal leading-none">
+                        MY <span class="text-gold">PASSIONS.</span>
+                    </h2>
+                    <p class="text-slate-500 mt-8 text-lg">Selain fokus pada akademik, inilah beberapa hal yang membuat saya tetap produktif.</p>
+                </div>
+                <div class="hidden md:block">
+                    <div class="text-gold font-black text-9xl opacity-5 select-none uppercase">Hobby</div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Hobby 1 -->
+                <div class="hobby-card reveal" style="transition-delay: 0ms;">
+                    <div class="hobby-icon w-16 h-16 bg-royal/5 rounded-2xl flex items-center justify-center text-royal mb-8 transition-all duration-300">
+                        <i data-lucide="camera" size="32"></i>
+                    </div>
+                    <h3 class="font-heading font-black text-2xl mb-4 uppercase italic">Photography</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Menangkap momen berharga dan melihat dunia melalui lensa kamera untuk mengabadikan setiap kenangan unik.</p>
+                </div>
+                <!-- Hobby 2 -->
+                <div class="hobby-card reveal" style="transition-delay: 150ms;">
+                    <div class="hobby-icon w-16 h-16 bg-royal/5 rounded-2xl flex items-center justify-center text-royal mb-8 transition-all duration-300">
+                        <i data-lucide="code-2" size="32"></i>
+                    </div>
+                    <h3 class="font-heading font-black text-2xl mb-4 uppercase italic">Coding</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Membangun solusi digital melalui baris kode, terus belajar teknologi terbaru untuk menciptakan web inovatif.</p>
+                </div>
+                <!-- Hobby 3 -->
+                <div class="hobby-card reveal" style="transition-delay: 300ms;">
+                    <div class="hobby-icon w-16 h-16 bg-royal/5 rounded-2xl flex items-center justify-center text-royal mb-8 transition-all duration-300">
+                        <i data-lucide="trophy" size="32"></i>
+                    </div>
+                    <h3 class="font-heading font-black text-2xl mb-4 uppercase italic">Sports</h3>
+                    <p class="text-sm opacity-70 leading-relaxed">Menjaga kebugaran fisik, hobi ini mengajarkan saya tentang sportivitas dan kerjasama tim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="py-40 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <h2 class="font-heading text-5xl md:text-7xl font-black uppercase text-royal">THE <span class="text-gold italic">JOURNEY.</span></h2>
+                <div class="w-16 h-1 bg-gold mx-auto mt-6"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- MPK -->
+                <div class="experience-card reveal">
+                    <div class="w-full aspect-[4/3] overflow-hidden bg-slate-200">
+                        <img src="C:\Users\ASUS\Downloads\foto\WhatsApp Image 2026-02-03 at 20.36.33.jpeg" alt="MPK" class="image-container hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x300?text=MPK+Activity'">
+                    </div>
+                    <div class="p-8">
+                        <span class="text-[10px] font-black text-gold uppercase tracking-[0.2em] mb-4 block">Organisasi</span>
+                        <h3 class="font-heading font-extrabold text-xl text-royal mb-4 uppercase">MPK</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Mengawal aspirasi siswa dan menjaga stabilitas kedisiplinan sekolah.</p>
+                    </div>
+                </div>
+                <!-- PRAMUKA -->
+                <div class="experience-card reveal" style="transition-delay: 100ms;">
+                    <div class="w-full aspect-[4/3] overflow-hidden bg-slate-200">
+                        <img src="C:\Users\ASUS\Downloads\foto\WhatsApp Image 2026-02-03 at 20.36.34.jpeg" alt="Pramuka" class="image-container hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x300?text=Pramuka+Activity'">
+                    </div>
+                    <div class="p-8">
+                        <span class="text-[10px] font-black text-gold uppercase tracking-[0.2em] mb-4 block">Kepanduan</span>
+                        <h3 class="font-heading font-extrabold text-xl text-royal mb-4 uppercase">PRAMUKA</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Mengasah karakter, kemandirian, dan kerjasama dalam tim kepanduan.</p>
+                    </div>
+                </div>
+                <!-- FKFS 1 -->
+                <div class="experience-card reveal" style="transition-delay: 200ms;">
+                    <div class="w-full aspect-[4/3] overflow-hidden bg-slate-200">
+                        <img src="C:\Users\ASUS\Downloads\foto\WhatsApp Image 2026-02-03 at 20.36.34 (1).jpeg" alt="FKFS" class="image-container hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x300?text=FKFS+Activity'">
+                    </div>
+                    <div class="p-8">
+                        <span class="text-[10px] font-black text-gold uppercase tracking-[0.2em] mb-4 block">Futsal</span>
+                        <h3 class="font-heading font-extrabold text-xl text-royal mb-4 uppercase">FKFS 2023</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Membangun mental juara melalui kompetisi olahraga yang sportif.</p>
+                    </div>
+                </div>
+                <!-- GOPE -->
+                <div class="experience-card reveal" style="transition-delay: 300ms;">
+                    <div class="w-full aspect-[4/3] overflow-hidden bg-slate-200">
+                        <img src="C:\Users\ASUS\Downloads\WhatsApp Image 2026-02-03 at 22.55.06.jpeg" alt="GOPE" class="image-container hover:scale-110 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/400x300?text=GOPE+Activity'">
+                    </div>
+                    <div class="p-8">
+                        <span class="text-[10px] font-black text-gold uppercase tracking-[0.2em] mb-4 block">Voli</span>
+                        <h3 class="font-heading font-extrabold text-xl text-royal mb-4 uppercase">GOPE 2024</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Kolaborasi intensif dalam setiap pertandingan dan latihan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Info (Skills) -->
+    <section class="py-24 bg-white border-y border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12 items-center">
+                <div class="reveal">
+                    <h3 class="font-heading font-black text-3xl mb-4 uppercase text-royal">Keahlian Utama</h3>
+                    <p class="text-slate-500 text-sm">Beberapa kompetensi teknis yang saya kuasai dan terus dikembangkan.</p>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-6 reveal" style="transition-delay: 200ms;">
+                    <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100 text-center transition-all hover:bg-royal hover:text-white group">
+                        <p class="font-black text-royal mb-2 group-hover:text-gold text-xl">90%</p>
+                        <p class="text-[10px] uppercase font-black text-slate-400 group-hover:text-white opacity-80">Public Speaking</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100 text-center transition-all hover:bg-royal hover:text-white group">
+                        <p class="font-black text-royal mb-2 group-hover:text-gold text-xl">85%</p>
+                        <p class="text-[10px] uppercase font-black text-slate-400 group-hover:text-white opacity-80">UI Design</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100 text-center transition-all hover:bg-royal hover:text-white group">
+                        <p class="font-black text-royal mb-2 group-hover:text-gold text-xl">80%</p>
+                        <p class="text-[10px] uppercase font-black text-slate-400 group-hover:text-white opacity-80">Leadership</p>
+                    </div>
+                    <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100 text-center transition-all hover:bg-royal hover:text-white group">
+                        <p class="font-black text-royal mb-2 group-hover:text-gold text-xl">75%</p>
+                        <p class="text-[10px] uppercase font-black text-slate-400 group-hover:text-white opacity-80">Programming</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-40 bg-slate-50 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-24 items-start">
+                    <div class="reveal">
+                        <h2 class="font-heading text-6xl md:text-8xl font-black uppercase text-royal mb-10 leading-[0.85]">
+                            Hubungi <br><span class="text-gold italic">Zahara.</span>
+                        </h2>
+                        <div class="space-y-10 mt-16">
+                            <div class="flex items-center gap-8 group">
+                                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:bg-royal transition-all duration-300">
+                                    <i data-lucide="instagram" class="text-gold group-hover:text-white" size="24"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-black uppercase text-slate-400 tracking-[0.2em]">Instagram</p>
+                                    <p class="text-royal font-bold text-lg">@zhrnh_</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-8 group">
+                                <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:bg-royal transition-all duration-300">
+                                    <i data-lucide="mail" class="text-gold group-hover:text-white" size="24"></i>
+                                </div>
+                                <div>
+                                    <p class="text-[11px] font-black uppercase text-slate-400 tracking-[0.2em]">Email</p>
+                                    <p class="text-royal font-bold text-lg text-sm md:text-lg">zahara@sman1subang.sch.id</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reveal bg-white p-10 md:p-16 rounded-[40px] shadow-2xl border border-slate-100" style="transition-delay: 200ms;">
+                        <form onsubmit="event.preventDefault();" class="space-y-8">
+                            <div>
+                                <label class="text-[11px] font-extrabold uppercase tracking-widest text-royal mb-3 block">Nama Anda</label>
+                                <input type="text" class="form-input" placeholder="Nama Lengkap">
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-extrabold uppercase tracking-widest text-royal mb-3 block">Pesan</label>
+                                <textarea class="form-input h-40 resize-none" placeholder="Apa yang ingin Anda bicarakan?"></textarea>
+                            </div>
+                            <button class="w-full btn-gold py-6 rounded-2xl font-black text-[14px] uppercase tracking-[0.3em] shadow-lg">
+                                Kirim Sekarang
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-deep-navy text-white pt-32 pb-16 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-20">
+                <div class="font-heading text-4xl font-black italic tracking-tighter text-gold">
+                    ZAHARA<span class="text-gold">.</span>
+                </div>
+                <div class="flex flex-wrap justify-center gap-8 md:gap-12 text-[11px] font-black uppercase tracking-widest">
+                    <a href="#home" class="footer-link">Beranda</a>
+                    <a href="#about" class="footer-link">Profil</a>
+                    <a href="#education" class="footer-link">Pendidikan</a>
+                    <a href="#journey" class="footer-link">Jejak</a>
+                    <a href="#hobby" class="footer-link">Hobi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="footer-bottom px-6 border-t border-white/5">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <p class="text-gold font-black text-[12px] uppercase tracking-[0.5em] mb-2">Siswa SMAN 1 Subang</p>
+                <p class="text-white/40 text-[10px] font-bold uppercase tracking-widest">Portofolio Digital © 2026</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-white/60 text-[10px] font-medium tracking-[0.2em] uppercase">Dibuat Oleh Zahara Nurhasanah</p>
+                <p class="text-white/20 text-[9px] mt-2 tracking-tighter uppercase">All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const logo = document.getElementById('logo');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-2xl', 'py-4');
+                navbar.classList.remove('py-6');
+                logo.classList.replace('text-white', 'text-royal');
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    el.classList.remove('text-white/80');
+                    el.classList.add('text-slate-600');
+                });
+            } else {
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-2xl', 'py-4');
+                navbar.classList.add('py-6');
+                logo.classList.replace('text-royal', 'text-white');
+                document.querySelectorAll('.nav-item').forEach(el => {
+                    el.classList.remove('text-slate-600');
+                    el.classList.add('text-white/80');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
